@@ -34,6 +34,6 @@ binary file and you are ready to go.
 
 ## Warning
 
-* This does't handle whitespace controls
+* This doesn't handle whitespace controls
 * It works on my projects, but it may not work on yours
 * There are no tests and the regex is quite complex
