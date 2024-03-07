@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/finder": "^6.4",
+        "symfony/console": "^6.4",
+        "jolicode/castor": "^0.13.1"
+    }
+}
