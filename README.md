@@ -16,7 +16,7 @@ It's semantically more correct, than the following syntax:
 {% include 'path/to/file.html.twig' %}
 ```
 
-So I made this to apply this kind of changes:
+So I made this application to apply this kind of changes:
 
 ```diff
  {% block header %}
@@ -24,6 +24,8 @@ So I made this to apply this kind of changes:
 +     {{ include('_header.html.twig') }}
  {% endblock %}
 ```
+
+It's build and packaged with [Castor](https://github.com/jolicode/castor).
 
 ## Installation
 
