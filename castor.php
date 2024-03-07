@@ -1,6 +1,9 @@
 <?php
 
+use Castor\Attribute\AsListener;
 use Castor\Attribute\AsTask;
+use Castor\Event\AfterApplicationInitializationEvent;
+use Castor\TaskDescriptorCollection;
 use Symfony\Component\Finder\Finder;
 
 use function Castor\io;
@@ -48,7 +51,8 @@ function replace(string $path): void
     }
 }
 
-#[AsTask(description: "@internal: package the application in a static binary file")]
+#[Internal]
+#[AsTask(description: "Package the application in a static binary file")]
 function package(): void
 {
     if (Phar::running(false)) {
@@ -65,4 +69,22 @@ function package(): void
 
     io()->section('Compiling static binary');
     run(['castor', 'compile', 'twig-include-syntax.linux.phar']);
+}
+
+#[Attribute(Attribute::TARGET_FUNCTION)]
+class Internal
+{
+}
+
+#[AsListener(AfterApplicationInitializationEvent::class)]
+function afterApplicationInitialization(AfterApplicationInitializationEvent $event): void
+{
+    if (!Phar::running(false)) {
+        return;
+    }
+
+    $tasks = $event->taskDescriptorCollection->taskDescriptors;
+    $tasks = array_filter($tasks, fn ($task) => !(bool) ($task->function->getAttributes(Internal::class)[0] ?? false));
+
+    $event->taskDescriptorCollection = new TaskDescriptorCollection($tasks, []);
 }
