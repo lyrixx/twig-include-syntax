@@ -1,6 +1,6 @@
 # Twig Include Syntax
 
-Bored to update twig include syntax by hand? Me too!
+Bored by updating twig `include` syntax by hand? Me too!
 
 You don't understand what I'm talking about? Let me explain.
 
@@ -10,7 +10,7 @@ When you include a file in twig, you have to use the following syntax:
 {{ include('path/to/file.html.twig') }}
 ```
 
-It's semantically more correct, than the following syntax:
+It's semantically more correct than the following syntax:
 
 ```twig
 {% include 'path/to/file.html.twig' %}
